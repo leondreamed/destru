@@ -1,8 +1,8 @@
 {
-  "name": "destr",
+  "name": "destru",
   "version": "2.0.2",
   "description": "A faster, secure and convenient alternative for JSON.parse",
-  "repository": "unjs/destr",
+  "repository": "leondreamed/destru",
   "license": "MIT",
   "type": "module",
   "exports": {

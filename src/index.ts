@@ -29,7 +29,7 @@ export type Options = {
   strict?: boolean;
 };
 
-export function destr<T = unknown>(value: any, options: Options = {}): T {
+export function destr(value: any, options: Options = {}): unknown {
   if (typeof value !== "string") {
     return value;
   }
@@ -41,32 +41,32 @@ export function destr<T = unknown>(value: any, options: Options = {}): T {
     value.at(-1) === '"' &&
     !value.includes("\\")
   ) {
-    return _value.slice(1, -1) as T;
+    return _value.slice(1, -1);
   }
 
   if (_value.length <= 9) {
     const _lval = _value.toLowerCase();
     if (_lval === "true") {
-      return true as T;
+      return true;
     }
     if (_lval === "false") {
-      return false as T;
+      return false;
     }
     if (_lval === "undefined") {
-      return undefined as T;
+      return undefined;
     }
     if (_lval === "null") {
       // eslint-disable-next-line unicorn/no-null
-      return null as T;
+      return null;
     }
     if (_lval === "nan") {
-      return Number.NaN as T;
+      return Number.NaN;
     }
     if (_lval === "infinity") {
-      return Number.POSITIVE_INFINITY as T;
+      return Number.POSITIVE_INFINITY;
     }
     if (_lval === "-infinity") {
-      return Number.NEGATIVE_INFINITY as T;
+      return Number.NEGATIVE_INFINITY;
     }
   }
 
@@ -74,7 +74,7 @@ export function destr<T = unknown>(value: any, options: Options = {}): T {
     if (options.strict) {
       throw new SyntaxError("[destr] Invalid JSON");
     }
-    return value as T;
+    return value;
   }
 
   try {
@@ -89,12 +89,12 @@ export function destr<T = unknown>(value: any, options: Options = {}): T {
     if (options.strict) {
       throw error;
     }
-    return value as T;
+    return value;
   }
 }
 
-export function safeDestr<T = unknown>(value: any, options: Options = {}): T {
-  return destr<T>(value, { ...options, strict: true });
+export function safeDestr(value: any, options: Options = {}): unknown {
+  return destr(value, { ...options, strict: true });
 }
 
 export default destr;
